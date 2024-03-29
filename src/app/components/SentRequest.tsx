@@ -1,30 +1,29 @@
 import React from "react";
-import { TestimonialCard } from "./Card";
+import { SentTestimonialCard } from "./SentCard";
 
-interface ReceivedRequestProps {
+interface SentRequestProps {
   numberOfProposals: number; // Define prop type
 }
 
-function ReceivedRequest({ numberOfProposals }: ReceivedRequestProps) {
-  // Accept prop as an argument
+function SentRequest({ numberOfProposals }: SentRequestProps) {
   return (
     <>
       <div className="flex items-center justify-center mt-4">
         <hr className="w-1/4 border-gray-300 mr-2" />
-        {"YOU HAVE\u00A0"}
+        {"YOU HAVE Sent\u00A0"}
         <span className="text-teal-500">
-          {numberOfProposals} new Project Proposals
+          {numberOfProposals}  Project Proposals
         </span>
         <hr className="w-1/4 border-gray-300 ml-2" />{" "}
       </div>
 
       <div className="flex justify-center mt-4 flex-col">
-        <TestimonialCard />
-        <TestimonialCard />
-        <TestimonialCard />
+              <SentTestimonialCard isPending={true}></SentTestimonialCard>
+              <SentTestimonialCard isPending={false}></SentTestimonialCard>
+
       </div>
     </>
   );
 }
 
-export default ReceivedRequest;
+export default SentRequest;

@@ -13,19 +13,19 @@ export default function Home() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [clicked, setClicked] = useState(1);
   const menuItems = [
-    { name: "ONGOING PROJECTS", icon: <FaBlogger />, count: 5 },
-    { name: "INVITATIONS", icon: <FaRegCircleDot />, count: 2 },
-    { name: "PAST PROJECTS", icon: <FaArchive />, count: 8 },
-    { name: "GROUP", icon: <FaUserGroup />, count: 6 },
+    { name: "Ongoing ", icon: <FaBlogger />, count: 5 },
+    { name: "Invitation", icon: <FaRegCircleDot />, count: 2 },
+    { name: "Completed", icon: <FaArchive />, count: 8 },
+    { name: "Group", icon: <FaUserGroup />, count: 6 },
   ];
 
   return (
     <div className="min-h-screen bg-backG">
       <Navbar />
 
-      <div className="grid min-h-screen grid-cols-1 md:grid-cols-[0.4fr,auto_1fr] place-content-stretchf gap-4 overflow-hidden px-4 md:px-20 py-10">
+      <div className="grid min-h-screen grid-cols-1 md:grid-cols-[0.4fr,auto_1fr] place-content-stretchf gap-4 overflow-hidden px-4 md:px-20 py-10 relative">
         <div className="md:order-first hidden md:block">
-          <button className="h-[26%] rounded bg-white">
+          <button className="h-[26%]  rounded bg-white">
             {menuItems.map((item, index) => (
               <div
                 key={index}
@@ -40,9 +40,9 @@ export default function Home() {
                   {activeIndex === index && (
                     <div className="absolute top-0 left-0 h-full bg-teal-500 w-2 z-10" />
                   )}
-                  <div className="ml-5">{item.icon}</div>
+                  <div className="ml-6">{item.icon}</div>
                   <span
-                    className={`ml-2 ${
+                    className={`ml-5 ${
                       activeIndex === index ? "text-gray-400" : ""
                     }`}
                   >
@@ -54,7 +54,7 @@ export default function Home() {
             ))}
           </button>
         </div>
-        <Sent ></Sent>
+        <Sent></Sent>
       </div>
     </div>
   );
