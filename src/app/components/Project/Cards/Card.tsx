@@ -67,8 +67,8 @@ export function TestimonialCard() {
           <div className="p-5">
             <Button
               placeholder=""
-              variant="gradient"
-              color="teal"
+              variant="outlined"
+              color="red"
               className="w-24 h-10"
               onClick={() => {}}
             >

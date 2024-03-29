@@ -15,12 +15,12 @@ function OnGoingP() {
   const projectLink = "github.com";
 
   return (
-    <div className="">
+    <div className="rounded w-full max-w-[70rem] bg-white px-4 relative max-h-screen overflow-y-auto">
       {/* Other content */}
       <ProjectDetailCard
         startDate={startDate}
         peopleInProject={peopleInProject}
-              progress={progress}
+        progress={progress}
         projectLink={projectLink}
       />
       <ProjectDetailCard
