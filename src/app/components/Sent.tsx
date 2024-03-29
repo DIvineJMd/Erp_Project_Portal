@@ -1,24 +1,44 @@
 import type { NextPage } from "next";
 import { useState } from "react";
-import { TestimonialCard } from "./Card";
+import { Button } from "@material-tailwind/react";
+import ReceivedRequest from "./recivedRequest";
 
-interface SentProps {
-  numberOfProposals: number;
-}
 
-const Sent: NextPage<SentProps> = ({ numberOfProposals }) => {
+const Sent: NextPage = () => {
+  const [clicked, setClicked] = useState(1);
+
   return (
-    <>
-      <div className="flex items-center justify-center mt-4">
-        <hr className="w-1/4 border-gray-300 mr-2" />
-        {"YOU HAVE\u00A0"}
-        <span className="text-teal-500">
-          {numberOfProposals} new Project Proposals
-        </span>
-        <hr className="w-1/4 border-gray-300 ml-2" />
+    <div className="">
+      <div className="rounded w-full md:w-full bg-white px-4 relative max-h-screen overflow-y-auto">
+        <div className="flex gap-2">
+          <Button
+            placeholder=""
+            variant="gradient"
+            color={clicked === 1 ? "teal" : "white"}
+            className={clicked === 1 ? "w-full md:w-48 h-12" : "w-full md:w-40 h-10"}
+            onClick={() => setClicked(1)}
+          >
+            Sent
+          </Button>
+          <Button
+            placeholder=""
+            variant="gradient"
+            color={clicked === 2 ? "teal" : "white"}
+            className={clicked === 2 ? "w-full md:w-48 h-12" : "w-full md:w-40 h-10"}
+            onClick={() => setClicked(2)}
+          >
+            Received
+          </Button>
+        </div>
+        <div className="px-2">
+          {clicked === 2 && (
+            <div className="py-5">
+              <ReceivedRequest numberOfProposals={5} /> {/* Remove prop */}
+            </div>
+          )}
+        </div>
       </div>
-      <TestimonialCard></TestimonialCard>
-    </>
+    </div>
   );
 };
 

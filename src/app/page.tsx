@@ -25,7 +25,7 @@ export default function Home() {
 
       <div className="grid min-h-screen grid-cols-1 md:grid-cols-[0.4fr,auto_1fr] place-content-stretchf gap-4 overflow-hidden px-4 md:px-20 py-10">
         <div className="md:order-first hidden md:block">
-          <button className=" h-[26%] rounded bg-white ">
+          <button className="h-[26%] rounded bg-white">
             {menuItems.map((item, index) => (
               <div
                 key={index}
@@ -54,36 +54,7 @@ export default function Home() {
             ))}
           </button>
         </div>
-        <div className=" rounded w-full md:w-[200%] bg-white px-4  relative max-h-screen overflow-y-auto">
-          <div className="flex gap-3">
-            <Button
-              placeholder=""
-              variant="gradient"
-              color={clicked === 1 ? "teal" : "white"}
-              className={
-                clicked === 1 ? "w-full md:w-48 h-12" : "w-full md:w-40 h-10"
-              }
-              onClick={() => setClicked(1)}
-            >
-              Sent
-            </Button>
-            <Button
-              placeholder=""
-              variant="gradient"
-              color={clicked === 2 ? "teal" : "white"}
-              className={
-                clicked === 2 ? "w-full md:w-48 h-12" : "w-full md:w-40 h-10"
-              }
-              onClick={() => setClicked(2)}
-            >
-              Received
-            </Button>
-          </div>
-          {clicked === 1 && <Sent numberOfProposals={5}></Sent>}
-          {clicked === 2 && (
-            <div className="py-5">This is visible when clicked is 2</div>
-          )}
-        </div>
+        <Sent ></Sent>
       </div>
     </div>
   );
