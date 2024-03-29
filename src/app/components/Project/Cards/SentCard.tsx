@@ -17,7 +17,7 @@ export function SentTestimonialCard({ isPending }: SentTestimonialCardProps) {
       placeholder=""
       color="transparent"
       shadow={true}
-      className="w-full max-w-[70rem]"
+      className="w-full max-w-[100rem]"
     >
       <CardHeader
         placeholder=""

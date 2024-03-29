@@ -1,5 +1,5 @@
 import React from "react";
-import { TestimonialCard } from "./Card";
+import { TestimonialCard } from "./Cards/Card";
 
 interface ReceivedRequestProps {
   numberOfProposals: number; // Define prop type

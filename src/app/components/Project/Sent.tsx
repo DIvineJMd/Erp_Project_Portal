@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { useState } from "react";
 import { Button } from "@material-tailwind/react";
-import ReceivedRequest from "./recivedRequest";
+import ReceivedRequest from "./RecivedRequest";
 import SentRequest from "./SentRequest";
 
 const Sent: NextPage = () => {
