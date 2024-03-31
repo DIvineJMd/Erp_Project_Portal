@@ -1,24 +1,39 @@
 import { AiOutlineSearch } from "react-icons/ai";
 import { BsFillGridFill } from "react-icons/bs";
+import Link from "next/link";
 
-export default function Navbar() {
+interface NavItemProps {
+  icon: string;
+  text: string;
+  link: string;
+}
+
+const Navbar: React.FC = () => {
   return (
     <nav className="flex items-center justify-between bg-white fixed z-50 relative">
-      <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <div className="flex items-center mr-20">
           <span className="text-2xl font-semibold text-teal-500">Kyoso</span>
           <div className="border-l h-11 mx-3"></div>
           <div className="hidden lg:flex lg:items-center lg:w-auto ml-10 space-x-10">
-            <NavItem icon="/feed.png" text="FEED" />
-            <NavItem icon="/case.svg" text="PROJECT" />
-            <NavItem icon="/chat.svg" text="CHAT" />
-            <NavItem icon="/bell.svg" text="NOTIFICATIONS" />
+            <NavItem icon="/feed.png" text="FEED" link="/" />
+            <NavItem
+              icon="/case.svg"
+              text="PROJECT"
+              link="/components/Project/ProjectPage"
+            />
+            <NavItem icon="/chat.svg" text="CHAT" link="/" />
+            <NavItem icon="/bell.svg" text="NOTIFICATIONS" link="/" />
           </div>
           <div className="flex lg:hidden lg:items-center space-x-3">
-            <NavItem icon="/feed.png" text="" />
-            <NavItem icon="/case.svg" text="" />
-            <NavItem icon="/chat.svg" text="" />
-            <NavItem icon="/bell.svg" text="" />
+            <NavItem icon="/feed.png" text="" link="/" />
+            <NavItem
+              icon="/case.svg"
+              text=""
+              link="/components/Project/ProjectPage"
+            />
+            <NavItem icon="/chat.svg" text="" link="/" />
+            <NavItem icon="/bell.svg" text="" link="/" />
           </div>
         </div>
 
@@ -57,15 +72,19 @@ export default function Navbar() {
       </div>
     </nav>
   );
-}
+};
 
-function NavItem({ icon, text }) {
+const NavItem: React.FC<NavItemProps> = ({ icon, text, link }) => {
   return (
-    <a href="#" className="text-black text-sm hover:text-gray-600">
-      <div className="flex flex-col items-center">
-        <img className="h-5 w-5" src={icon} alt={`${text} Logo`} />
-        {text}
+    <Link href={link} passHref>
+      <div className="text-black text-sm hover:text-gray-600 cursor-pointer">
+        <div className="flex flex-col items-center">
+          <img className="h-5 w-5" src={icon} alt={`${text} Logo`} />
+          {text}
+        </div>
       </div>
-    </a>
+    </Link>
   );
-}
+};
+
+export default Navbar;
