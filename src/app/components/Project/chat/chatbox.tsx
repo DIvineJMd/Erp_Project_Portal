@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { CardBody, Input, Typography } from "@material-tailwind/react";
 import { IoMdClose } from "react-icons/io";
 import { FaMagnifyingGlass } from "react-icons/fa6";
+import { BsSendArrowDown, BsArrowLeft } from "react-icons/bs";
 
 interface Profile {
   name: string;
@@ -48,6 +49,7 @@ const SideChatBox: React.FC<SideChatBoxProps> = ({ isOpen, onClose }) => {
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
   const [selectedProfile, setSelectedProfile] = useState<Profile | null>(null);
   const [showInbox, setShowInbox] = useState<boolean>(true);
+  const [message, setMessage] = useState<string>("");
 
   const handleCloseChatBox = () => {
     onClose();
@@ -89,29 +91,43 @@ const SideChatBox: React.FC<SideChatBoxProps> = ({ isOpen, onClose }) => {
     setShowInbox(false); // Switch to show chat messages when a profile is clicked
   };
 
+  // Handle click on back button
+  const handleBackButtonClick = () => {
+    setShowInbox(true);
+    setSelectedProfile(null);
+  };
+
+  const handleMessageSend = () => {
+    // Your logic to send message
+    console.log("Message sent:", message);
+    setMessage(""); // Clear message input
+  };
+
   return (
     <>
       {isOpen && (
         <div className="fixed bottom-0 right-0 m-4 z-50">
           <div className="relative max-w-md w-full bg-white shadow-xl rounded-lg">
             <div className="flex justify-between bg-teal-500 text-white p-3 rounded-t-lg">
+              <button onClick={handleBackButtonClick} className="focus:outline-none">
+                <BsArrowLeft className="text-xl" />
+              </button>
               <h2 className="font-bold">{showInbox ? "Inbox" : "Chat"}</h2>
-              <button
-                onClick={handleCloseChatBox}
-                className="focus:outline-none"
-              >
+              <button onClick={handleCloseChatBox} className="focus:outline-none">
                 <IoMdClose />
               </button>
             </div>
-            <div className="p-4">
-              <div className="w-full md:w-72">
-                <Input
-                  crossOrigin={""}
-                  label="Search"
-                  icon={<FaMagnifyingGlass className="h-5 w-5" />}
-                />
+            {showInbox && (
+              <div className="p-4">
+                <div className="w-full md:w-72">
+                  <Input
+                    crossOrigin={""}
+                    label="Search"
+                    icon={<FaMagnifyingGlass className="h-5 w-5" />}
+                  />
+                </div>
               </div>
-            </div>
+            )}
             <CardBody placeholder="" className="overflow-scroll px-0 max-h-96">
               <div className="p-4">
                 {showInbox
@@ -131,26 +147,40 @@ const SideChatBox: React.FC<SideChatBoxProps> = ({ isOpen, onClose }) => {
                         </Typography>
                       </div>
                     ))
-                  : chatMessages.map((message) => (
-                      <div key={message.id} className="mb-4">
-                        <div className="flex items-center mb-2">
+                  : selectedProfile && (
+                      <>
+                        <div className="flex items-center mb-4">
                           <img
-                            src={message.sender.avatar}
-                            alt={message.sender.name}
+                            src={selectedProfile.avatar}
+                            alt={selectedProfile.name}
                             className="w-8 h-8 rounded-full mr-2"
                           />
                           <Typography placeholder="" className="font-semibold">
-                            {message.sender.name}
+                            {selectedProfile.name}
                           </Typography>
                         </div>
-                        <div className="bg-gray-100 p-3 rounded-lg ml-10">
-                          <p>{message.message}</p>
-                          <p className="text-xs text-gray-500">
-                            {message.timestamp}
-                          </p>
+                        <div className="mb-4">
+                          <div className="bg-gray-100 p-3 rounded-lg">
+                            <p>This is a chat message.</p>
+                            <p className="text-xs text-gray-500">Timestamp</p>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                        <div className="w-full md:w-72">
+                          <Input
+                            crossOrigin={""}
+                            label="Type message"
+                            icon={<BsSendArrowDown className="h-5 w-5" />}
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter") {
+                                handleMessageSend();
+                              }
+                            }}
+                          />
+                        </div>
+                      </>
+                    )}
               </div>
             </CardBody>
           </div>

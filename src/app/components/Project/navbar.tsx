@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -8,7 +9,7 @@ interface NavItemProps {
   icon: string;
   text: string;
   link?: string;
-  handleClick?: () => void; 
+  handleClick?: () => void;
 }
 
 const Navbar: React.FC = () => {
@@ -30,9 +31,13 @@ const Navbar: React.FC = () => {
               <NavItem
                 icon="/case.svg"
                 text="PROJECT"
-                link="./components/Project/ProjectPage"
+                link="./components/Project"
               />
-              <NavItem icon="/chat.svg" text="CHAT" handleClick={handleChatClick} />
+              <NavItem
+                icon="/chat.svg"
+                text="CHAT"
+                handleClick={handleChatClick}
+              />
               <NavItem icon="/bell.svg" text="NOTIFICATIONS" link="/" />
             </div>
             <div className="flex lg:hidden lg:items-center space-x-3">
@@ -77,7 +82,9 @@ const Navbar: React.FC = () => {
         </div>
       </nav>
 
-      {isChatOpen && <SideChatBox isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />}
+      {isChatOpen && (
+        <SideChatBox isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
+      )}
     </>
   );
 };
@@ -85,7 +92,10 @@ const Navbar: React.FC = () => {
 const NavItem: React.FC<NavItemProps> = ({ icon, text, link, handleClick }) => {
   if (!link) {
     return (
-      <div onClick={handleClick} className="text-black text-sm hover:text-gray-600 cursor-pointer">
+      <div
+        onClick={handleClick}
+        className="text-black text-sm hover:text-gray-600 cursor-pointer"
+      >
         <div className="flex flex-col items-center">
           <img className="h-5 w-5" src={icon} alt={`${text} Logo`} />
           {text}
@@ -95,13 +105,15 @@ const NavItem: React.FC<NavItemProps> = ({ icon, text, link, handleClick }) => {
   }
 
   return (
-    <Link href={link}
-      className="text-black text-sm hover:text-gray-600 cursor-pointer" onClick={handleClick}>
-        <div className="flex flex-col items-center">
-          <img className="h-5 w-5" src={icon} alt={`${text} Logo`} />
-          {text}
-        </div>
-
+    <Link
+      href={link}
+      className="text-black text-sm hover:text-gray-600 cursor-pointer"
+      onClick={handleClick}
+    >
+      <div className="flex flex-col items-center">
+        <img className="h-5 w-5" src={icon} alt={`${text} Logo`} />
+        {text}
+      </div>
     </Link>
   );
 };

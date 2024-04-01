@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { FaBlogger } from "react-icons/fa";
 import { FaRegCircleDot } from "react-icons/fa6";
@@ -5,9 +6,9 @@ import { FaArchive } from "react-icons/fa";
 import { FaUserGroup } from "react-icons/fa6";
 import Sent from "./Sent";
 import OnGoingP from "./ongoing";
-import CompletedP from "./Completed";
-
-function ProjectPage() {
+import CompletedP from "./Completed"
+function
+  ProjectPage() {
   const [activeIndex, setActiveIndex] = useState(1);
   const menuItems = [
     { name: "Ongoing", icon: <FaBlogger />, count: 5 },
