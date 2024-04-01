@@ -1,11 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  Card,
-  CardHeader,
-  Input,
-  Typography,
-  CardBody,
-} from "@material-tailwind/react";
+import { CardBody, Input, Typography } from "@material-tailwind/react";
 import { IoMdClose } from "react-icons/io";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 
@@ -22,6 +16,16 @@ const fakeProfiles: Profile[] = [
   },
   {
     name: "Jane Smith",
+    avatar:
+      "https://cdn.pixabay.com/photo/2023/09/01/14/24/boy-avtar-8227084_1280.png",
+  },
+  {
+    name: "jondon Smith",
+    avatar:
+      "https://cdn.pixabay.com/photo/2023/09/01/14/24/boy-avtar-8227084_1280.png",
+  },
+  {
+    name: "carlos Smith",
     avatar:
       "https://cdn.pixabay.com/photo/2023/09/01/14/24/boy-avtar-8227084_1280.png",
   },
@@ -43,10 +47,12 @@ interface SideChatBoxProps {
 const SideChatBox: React.FC<SideChatBoxProps> = ({ isOpen, onClose }) => {
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
   const [selectedProfile, setSelectedProfile] = useState<Profile | null>(null);
+  const [showInbox, setShowInbox] = useState<boolean>(true);
 
   const handleCloseChatBox = () => {
     onClose();
     setSelectedProfile(null); // Reset selected profile when closing the chat box
+    setShowInbox(true); // Reset to show inbox when closing the chat box
   };
 
   // Function to generate a fake chat message
@@ -80,6 +86,7 @@ const SideChatBox: React.FC<SideChatBoxProps> = ({ isOpen, onClose }) => {
   // Handle click on a profile
   const handleProfileClick = (profile: Profile) => {
     setSelectedProfile(profile);
+    setShowInbox(false); // Switch to show chat messages when a profile is clicked
   };
 
   return (
@@ -88,7 +95,7 @@ const SideChatBox: React.FC<SideChatBoxProps> = ({ isOpen, onClose }) => {
         <div className="fixed bottom-0 right-0 m-4 z-50">
           <div className="relative max-w-md w-full bg-white shadow-xl rounded-lg">
             <div className="flex justify-between bg-teal-500 text-white p-3 rounded-t-lg">
-              <h2 className="font-bold">Chat</h2>
+              <h2 className="font-bold">{showInbox ? "Inbox" : "Chat"}</h2>
               <button
                 onClick={handleCloseChatBox}
                 className="focus:outline-none"
@@ -97,7 +104,7 @@ const SideChatBox: React.FC<SideChatBoxProps> = ({ isOpen, onClose }) => {
               </button>
             </div>
             <div className="p-4">
-              <div className="w-full md:w-72 ">
+              <div className="w-full md:w-72">
                 <Input
                   crossOrigin={""}
                   label="Search"
@@ -107,30 +114,43 @@ const SideChatBox: React.FC<SideChatBoxProps> = ({ isOpen, onClose }) => {
             </div>
             <CardBody placeholder="" className="overflow-scroll px-0 max-h-96">
               <div className="p-4">
-                {chatMessages.map((message) => (
-                  <div
-                    key={message.id}
-                    className="mb-4 flex justify-end"
-                    onClick={() => handleProfileClick(message.sender)}
-                  >
-                    <div className="flex items-center mb-2 cursor-pointer">
-                      <img
-                        src={message.sender.avatar}
-                        alt={message.sender.name}
-                        className="w-8 h-8 rounded-full ml-2"
-                      />
-                      <Typography placeholder="" className="font-semibold">
-                        {message.sender.name}
-                      </Typography>
-                    </div>
-                    <div className="bg-gray-100 p-3 rounded-lg ml-2">
-                      <p>{message.message}</p>
-                      <p className="text-xs text-gray-500">
-                        {message.timestamp}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+                {showInbox
+                  ? fakeProfiles.map((profile, index) => (
+                      <div
+                        key={index}
+                        className="mb-4 flex items-center cursor-pointer"
+                        onClick={() => handleProfileClick(profile)}
+                      >
+                        <img
+                          src={profile.avatar}
+                          alt={profile.name}
+                          className="w-8 h-8 rounded-full mr-2"
+                        />
+                        <Typography placeholder="" className="font-semibold">
+                          {profile.name}
+                        </Typography>
+                      </div>
+                    ))
+                  : chatMessages.map((message) => (
+                      <div key={message.id} className="mb-4">
+                        <div className="flex items-center mb-2">
+                          <img
+                            src={message.sender.avatar}
+                            alt={message.sender.name}
+                            className="w-8 h-8 rounded-full mr-2"
+                          />
+                          <Typography placeholder="" className="font-semibold">
+                            {message.sender.name}
+                          </Typography>
+                        </div>
+                        <div className="bg-gray-100 p-3 rounded-lg ml-10">
+                          <p>{message.message}</p>
+                          <p className="text-xs text-gray-500">
+                            {message.timestamp}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
               </div>
             </CardBody>
           </div>
