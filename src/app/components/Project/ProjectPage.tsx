@@ -8,7 +8,7 @@ import OnGoingP from "./ongoing";
 import CompletedP from "./Completed";
 
 function ProjectPage() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(1);
   const menuItems = [
     { name: "Ongoing", icon: <FaBlogger />, count: 5 },
     { name: "Invitation", icon: <FaRegCircleDot />, count: 2 },
