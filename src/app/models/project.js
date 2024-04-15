@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
-// const mongoUri = "mongodb+srv://adarsh21442:1D1to5zRc3fH8zgV@cluster0.7uszauk.mongodb.net/?retryWrites=true&w=majority&appName=Erp_Project_data";
+// const mongoUri = "";
 // if (!mongoUri) {
 //   throw new Error('MongoDB URI is not defined in environment variables');
 // }

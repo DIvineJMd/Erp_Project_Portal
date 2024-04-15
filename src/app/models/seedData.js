@@ -2,7 +2,7 @@ import { MongoClient, ServerApiVersion } from 'mongodb';
 import faker from 'faker';
 
 // MongoDB URI from environment variables
-const mongoUri = "mongodb+srv://adarsh21442:4IjyUg1XBemxV5rA@cluster0.7uszauk.mongodb.net/Projects?retryWrites=true&w=majority&appName=Erp_Project_data";
+const mongoUri = "";
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(mongoUri, {
