@@ -1,9 +1,10 @@
 "use client";
 
-import ProjectPage from "./components/Project/ProjectPage";
-import SideChatBox from "./components/Project/chat/chatbox";
-import Navbar from "./components/Project/navbar";
+
+import Loginui from "./components/Project/login/Loginui";
 
 export default function Home() {
-  return <div className="min-h-screen bg-backG">{/* <Navbar></Navbar> */}</div>;
+  return <div className="min-h-screen bg-backG">{
+    <Loginui></Loginui>
+    }</div>;
 }
