@@ -1,9 +1,27 @@
 // src/Components/Login.js
 import { Card } from "@material-tailwind/react";
-import React from "react";
+import { signIn } from "next-auth/react";
+import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 
-const Loginui = () => {
+const LoginUI = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const result = await signIn("credentials", {
+      redirect: false,
+      email,
+      password,
+    });
+
+    if (result.error) {
+      console.error("Login error:", result.error);
+      // Handle error (e.g., display error message)
+    }
+  };
+
   return (
     <>
       <section className="h-screen flex flex-col md:flex-row justify-center items-center my-2 mx-5 md:mx-0 md:my-0">
@@ -24,6 +42,7 @@ const Loginui = () => {
             <button
               type="button"
               className="mx-1 h-12 w-12  rounded-full bg-white hover:bg-gray-200 text-white shadow-[0_4px_9px_-4px_#3b71ca]"
+              onClick={() => signIn("google")}
             >
               <FcGoogle
                 size={20}
@@ -40,11 +59,15 @@ const Loginui = () => {
             className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded"
             type="text"
             placeholder="Email Address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <input
             className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
             type="password"
             placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <div className="mt-4 flex justify-between font-semibold text-sm">
             <label className="flex text-slate-500 hover:text-slate-600 cursor-pointer">
@@ -62,6 +85,7 @@ const Loginui = () => {
             <button
               className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider"
               type="submit"
+              onClick={handleLogin}
             >
               Login
             </button>
@@ -77,13 +101,13 @@ const Loginui = () => {
           </div>
         </Card>
       </section>
-      
+
       {/* Footer */}
       <footer className="text-center text-gray-500 text-sm mt-4">
-        © 2024 Your Company Name. All rights reserved.
+        © 2024 Kyso. All rights reserved.
       </footer>
     </>
   );
 };
 
-export default Loginui;
+export default LoginUI;

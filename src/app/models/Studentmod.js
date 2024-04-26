@@ -11,6 +11,7 @@ const StudentSchema = new Schema({
   gender: { type: String, enum: ['Male', 'Female', 'Other'], required: true },
   address: { type: String },
   phone: { type: String },
+  dp: { type: String, required: false},
 });
 
 const StudentModel = mongoose.models.Student || mongoose.model('Student', StudentSchema);
