@@ -4,6 +4,9 @@ import { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BsFillGridFill } from "react-icons/bs";
 import SideChatBox from "./chat/chatbox";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 interface NavItemProps {
   icon: string;
@@ -14,9 +17,21 @@ interface NavItemProps {
 
 const Navbar: React.FC = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const router=useRouter();
 
   const handleChatClick = () => {
     setIsChatOpen(!isChatOpen);
+  };
+
+  const logout = async () => {
+    try {
+      await axios.get("/api/users/logout");
+      toast.success("Logout successful");
+      router.push("/login");
+    } catch (error: any) {
+      console.log(error.message);
+      toast.error(error.message);
+    }
   };
 
   return (
@@ -27,11 +42,11 @@ const Navbar: React.FC = () => {
             <span className="text-2xl font-semibold text-teal-500">Kyoso</span>
             <div className="border-l h-11 mx-3"></div>
             <div className="hidden lg:flex lg:items-center lg:w-auto ml-10 space-x-10">
-              <NavItem icon="/feed.png" text="FEED" link="/" />
+              <NavItem icon="/feed.png" text="FEED" link="/feed" />
               <NavItem
                 icon="/case.svg"
                 text="PROJECT"
-                link="./components/Project"
+                link="./profile"
               />
               <NavItem
                 icon="/chat.svg"
@@ -49,7 +64,7 @@ const Navbar: React.FC = () => {
           </div>
 
           <div className="flex items-center relative ">
-            <div className="flex relative hidden md:block   mr-3 ml-5">
+            <div className="flex relative md:block   mr-3 ml-5">
               <input
                 type="text"
                 className="pl-10 pr-4 py-1 rounded-lg border-2 border-gray-300"
@@ -75,9 +90,12 @@ const Navbar: React.FC = () => {
               </a>
             </div>
 
-            <button className="ml-2 w-50 h-50 px-1 py-1 border rounded text-gray-600 border-teal-400 hover:text-teal-500 hover:border-black focus:outline-none focus:ring-2 focus:ring-teal-500">
-              <BsFillGridFill className="w-5 h-5" />
-            </button>
+            <button
+          onClick={logout}
+          className="bg-blue-500 ml-8 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Logout
+        </button>
           </div>
         </div>
       </nav>

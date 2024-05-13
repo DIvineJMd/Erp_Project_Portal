@@ -11,6 +11,11 @@ const userSchema = new mongoose.Schema({
         required: [true, "Please provide a email"],
         unique: true,
     },
+    student_id: {
+        type:Number,
+        required: [true, "Please provide a Student ID"],
+        unique: true,
+    },
     password: {
         type: String,
         required: [true, "Please provide a password"],

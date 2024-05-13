@@ -1,0 +1,30 @@
+const fakePopularHashtags = [
+    '#travel',
+    '#foodie',
+    '#photography',
+    '#nature',
+    '#fashion',
+    '#fitness',
+    '#art',
+    '#music',
+    '#technology',
+    '#love',
+    '#instagood',
+    '#photooftheday',
+    '#beautiful',
+    '#happy',
+    '#cute',
+    '#summer',
+    '#follow',
+    '#like4like',
+    '#tbt',
+    '#instadaily',
+    '#friends',
+    '#fun',
+    '#selfie',
+    '#instalike',
+    '#picoftheday',
+  ];
+  
+  export default fakePopularHashtags;
+  

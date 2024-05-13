@@ -15,6 +15,7 @@ interface ProjectDetailCardProps {
 }
 
 export function ProjectDetailCard({
+  projectName,
   startDate,
   peopleInProject,
   progress,
@@ -48,7 +49,7 @@ export function ProjectDetailCard({
           <div className="flex flex-col flex-grow gap-0.5">
             <div className="flex items-center justify-between">
               <Typography placeholder="" variant="h5" color="blue-gray">
-                Project Name
+                {projectName}
               </Typography>
               <div className="flex items-center gap-0"></div>
             </div>

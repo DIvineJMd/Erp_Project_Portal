@@ -21,7 +21,7 @@ function
     <div>
       <div className="grid min-h-screen grid-cols-1 md:grid-cols-[0.4fr,auto_1fr] place-content-stretchf gap-4 overflow-hidden px-4 md:px-20 py-10 relative">
         <div className="md:order-first hidden md:block">
-          <button className="h-auto rounded bg-white">
+          <button className="h-auto rounded bg-black">
             {menuItems.map((item, index) => (
               <div
                 key={index}

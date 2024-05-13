@@ -9,10 +9,13 @@ connect();
 export async function GET(request:NextRequest){
 
     try {
+        
         const userId = await getDataFromToken(request);
-        const user = await User.findOne({_id: userId}).select("-password");
+        const userObject=JSON.parse(userId)
+        const user = await User.findOne({email:userObject.email});
+
         return NextResponse.json({
-            mesaaage: "User found",
+            mesage: "User found",
             data: user
         })
     } catch (error:any) {
